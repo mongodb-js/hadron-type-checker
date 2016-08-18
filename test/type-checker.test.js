@@ -102,10 +102,9 @@ describe('TypeChecker', function() {
 
     context('when the object is a double', function() {
       context('when casting to a string', function() {
-
         it('returns the number as a string', function() {
           expect(TypeChecker.cast(2.45, 'String')).to.equal('2.45');
-        })
+        });
       });
     });
 
@@ -123,7 +122,7 @@ describe('TypeChecker', function() {
       context('when casting to a string', function() {
         it('returns an empty string', function() {
           expect(TypeChecker.cast(undefined, 'String')).to.equal('');
-        })
+        });
       });
     });
 
@@ -133,7 +132,7 @@ describe('TypeChecker', function() {
 
         it('returns the string id', function() {
           expect(TypeChecker.cast(objectId, 'String').length).to.equal(24);
-        })
+        });
       });
     });
 
@@ -177,7 +176,7 @@ describe('TypeChecker', function() {
 
         it('returns the string regex', function() {
           expect(TypeChecker.cast(regex, 'String')).to.equal('');
-        })
+        });
       });
     });
 
@@ -223,13 +222,13 @@ describe('TypeChecker', function() {
     context('when the object is a string', function() {
       it('returns String', function() {
         expect(TypeChecker.type('testing')).to.equal('String');
-      })
+      });
     });
 
     context('when the object is a double', function() {
       it('returns Double', function() {
         expect(TypeChecker.type(2.45)).to.equal('Double');
-      })
+      });
     });
 
     context('when the object is a binary', function() {
@@ -243,7 +242,7 @@ describe('TypeChecker', function() {
     context('when the object is an undefined', function() {
       it('returns Undefined', function() {
         expect(TypeChecker.type(undefined)).to.equal('Undefined');
-      })
+      });
     });
 
     context('when the object is an object id', function() {
@@ -251,7 +250,7 @@ describe('TypeChecker', function() {
 
       it('returns ObjectId', function() {
         expect(TypeChecker.type(objectId)).to.equal('ObjectID');
-      })
+      });
     });
 
     context('when the object is a boolean false', function() {
@@ -307,7 +306,7 @@ describe('TypeChecker', function() {
     context('when the object is a 32bit int', function() {
       it('returns Int32', function() {
         expect(TypeChecker.type(1234234)).to.equal('Int32');
-      })
+      });
     });
 
     context('when the object is a timestamp', function() {
@@ -321,7 +320,7 @@ describe('TypeChecker', function() {
     context('when the object is a 64 bit int', function() {
       it('returns Int64', function() {
         expect(TypeChecker.type(Number.MAX_SAFE_INTEGER)).to.equal('Int64');
-      })
+      });
     });
 
     context('when the object is a min key', function() {
@@ -329,7 +328,7 @@ describe('TypeChecker', function() {
 
       it('returns ObjectId', function() {
         expect(TypeChecker.type(minKey)).to.equal('MinKey');
-      })
+      });
     });
 
     context('when the object is a max key', function() {
@@ -337,7 +336,7 @@ describe('TypeChecker', function() {
 
       it('returns ObjectId', function() {
         expect(TypeChecker.type(maxKey)).to.equal('MaxKey');
-      })
+      });
     });
 
     context('when the object is an object', function() {
