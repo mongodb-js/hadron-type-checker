@@ -9,6 +9,8 @@ const Binary = bson.Binary;
 const BSONRegExp = bson.BSONRegExp;
 const Code = bson.Code;
 const Timestamp = bson.Timestamp;
+const Long = bson.Long;
+const Double = bson.Double;
 const TypeChecker = require('../lib/type-checker');
 
 describe('TypeChecker', function() {
@@ -44,11 +46,11 @@ describe('TypeChecker', function() {
         });
 
         context('when the integer is 64 bit', function() {
-          context('when casting to an int32', function() {
+          context('when casting to an int64', function() {
             var value = '2147483648';
 
-            it('returns the number', function() {
-              expect(TypeChecker.cast(value, 'Int64')).to.equal(2147483648);
+            it('returns the int64', function() {
+              expect(TypeChecker.cast(value, 'Int64')).to.deep.equal(new Long(2147483648));
             });
           });
         });
@@ -59,7 +61,7 @@ describe('TypeChecker', function() {
           var value = '23.45';
 
           it('returns the number', function() {
-            expect(TypeChecker.cast(value, 'Double')).to.equal(23.45);
+            expect(TypeChecker.cast(value, 'Double')).to.deep.equal(new Double(23.45));
           });
         });
       });
@@ -379,6 +381,8 @@ describe('TypeChecker', function() {
               expect(TypeChecker.castableTypes(value)).to.deep.equal([
                 'String',
                 'Int32',
+                'Int64',
+                'Double',
                 'Object',
                 'Array'
               ]);
@@ -392,6 +396,7 @@ describe('TypeChecker', function() {
               expect(TypeChecker.castableTypes(value)).to.deep.equal([
                 'String',
                 'Int64',
+                'Double',
                 'Object',
                 'Array'
               ]);
