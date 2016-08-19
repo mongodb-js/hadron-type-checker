@@ -102,10 +102,58 @@ describe('TypeChecker', function() {
       });
     });
 
-    context('when the object is a double', function() {
+    context('when the object is a primitive double', function() {
       context('when casting to a string', function() {
         it('returns the number as a string', function() {
           expect(TypeChecker.cast(2.45, 'String')).to.equal('2.45');
+        });
+      });
+    });
+
+    context('when the object is a double', function() {
+      context('when casting to a string', function() {
+        it('returns the number as a string', function() {
+          expect(TypeChecker.cast(new Double(2.45), 'String')).to.equal('2.45');
+        });
+      });
+    });
+
+    context('when the object is a long', function() {
+      context('when casting to a string', function() {
+        it('returns the number as a string', function() {
+          expect(TypeChecker.cast(new Long(245), 'String')).to.equal('245');
+        });
+      });
+
+      context('when casting to an int32', function() {
+        it('returns the number as an int32', function() {
+          expect(TypeChecker.cast(new Long(245), 'Int32')).to.equal(245);
+        });
+      });
+
+      context('when casting to a double', function() {
+        it('returns the number as a double', function() {
+          expect(TypeChecker.cast(new Long(245), 'Double')).to.deep.equal(new Double(245));
+        });
+      });
+    });
+
+    context('when the object is an int32', function() {
+      context('when casting to a string', function() {
+        it('returns the number as a string', function() {
+          expect(TypeChecker.cast(245, 'String')).to.equal('245');
+        });
+      });
+
+      context('when casting to an int64', function() {
+        it('returns the number as an int64', function() {
+          expect(TypeChecker.cast(245, 'Int64')).to.deep.equal(new Long(245));
+        });
+      });
+
+      context('when casting to a double', function() {
+        it('returns the number as a double', function() {
+          expect(TypeChecker.cast(245, 'Double')).to.deep.equal(new Double(245));
         });
       });
     });
