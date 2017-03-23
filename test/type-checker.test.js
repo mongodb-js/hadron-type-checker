@@ -887,6 +887,69 @@ describe('TypeChecker', function() {
             });
           });
 
+          context('with ISO-8601 dates it handles', function() {
+            // Using https://www.w3.org/TR/NOTE-datetime
+            it('Year', () => {
+              const value = '1997';
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+
+            it('Year and month', () => {
+              const value = '1997-07';
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+
+            it('Complete date', () => {
+              const value = '1997-07-16';
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+
+            it('Complete date plus hours and minutes', () => {
+              const value = '1997-07-16T19:20+01:00';
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+
+            it('Complete date plus hours, minutes and seconds', () => {
+              const value = '1997-07-16T19:20:30+01:00';
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+
+            it('Complete date plus hours, minutes, seconds and a decimal fraction of a second', () => {
+              const value = '1997-07-16T19:20:30.45+01:00';
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+          });
+
           context('when the date is with time and decimal', function() {
             var value = '2016-10-10T12:12:00.001';
 
