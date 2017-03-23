@@ -1412,16 +1412,18 @@ describe('TypeChecker', function() {
 
   describe('invalid Decimal-128 values', function() {
     context('invalid strings', function() {
-      var values = [
-        'E02',
+      const invalidDecimal128DateValues = [
         'E+02',
         'e+02',
+        '..1'
+      ];
+      const invalidDecimal128Values = [
+        'E02',
         '.',
         '.e',
         'invalid',
         'in',
         'i',
-        '..1',
         '1abcede',
         '1.24abc',
         '1.24abcE+02',
@@ -1430,25 +1432,33 @@ describe('TypeChecker', function() {
         '12324.123.1233',
         '123E 123'
       ];
-      for (var i = 0; i < values.length; i++) {
-        const value = values[i];
-        context(value + ' cast', function() {
-          it('cast throws an error', function() {
-            expect(function() {
-              TypeChecker.cast(value, 'Decimal128');
-            }).to.throw(value + ' not a valid Decimal128 string');
+      /**
+       * Build Decimal128 tests from a list of test values and
+       * a common array of expectations.
+       *
+       * @param {Array} values - Which values to apply this
+       * @param {Array} expectations -
+       */
+      const decimal128TestFactory = (values, expectations) => {
+        for (let i = 0; i < values.length; i++) {
+          const value = values[i];
+          context(value + ' cast', function() {
+            it('cast throws an error', function() {
+              expect(function() {
+                TypeChecker.cast(value, 'Decimal128');
+              }).to.throw(value + ' not a valid Decimal128 string');
+            });
           });
-        });
-        context(value + ' castableTypes', function() {
-          it('castableTypes does not include Decimal 128', function() {
-            expect(TypeChecker.castableTypes(value, true)).to.deep.equal(
-              ['String',
-                'Object',
-                'Array']
-            );
+          context(value + ' castableTypes', function() {
+            it('castableTypes does not include Decimal 128', function() {
+              expect(TypeChecker.castableTypes(value, true)).to.deep.equal(expectations);
+            });
           });
-        });
-      }
+        }
+      };
+      //
+      decimal128TestFactory(invalidDecimal128DateValues, ['Date', 'String', 'Object', 'Array']);
+      decimal128TestFactory(invalidDecimal128Values, ['String', 'Object', 'Array']);
     });
 
     context('empty string', function() {
