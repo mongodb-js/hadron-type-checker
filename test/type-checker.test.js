@@ -893,6 +893,9 @@ describe('TypeChecker', function() {
               const value = '1997';
               expect(TypeChecker.castableTypes(value)).to.deep.equal([
                 'Date',
+                'Int32',
+                'Int64',
+                'Double',
                 'String',
                 'Object',
                 'Array'
