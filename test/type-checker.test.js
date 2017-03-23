@@ -963,8 +963,21 @@ describe('TypeChecker', function() {
             });
           });
 
-          context('when the date is invalid', function() {
-            var value = '2016-10-10 12:12:00.001';
+          context('when the date contains a space instead of a T', function() {
+            const value = '2016-10-10 12:12:00.001';
+
+            it('returns the list', function() {
+              expect(TypeChecker.castableTypes(value)).to.deep.equal([
+                'Date',
+                'String',
+                'Object',
+                'Array'
+              ]);
+            });
+          });
+
+          context('when the date is invalid no matter which way you interpret it', function() {
+            const value = '2016.13.13';  // There is no 13th month
 
             it('returns the list', function() {
               expect(TypeChecker.castableTypes(value)).to.deep.equal([
