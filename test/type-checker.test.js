@@ -563,6 +563,7 @@ describe('TypeChecker', function() {
 
               it('returns the list', function() {
                 expect(TypeChecker.castableTypes(value, true)).to.deep.equal([
+                  'Date',
                   'Double',
                   'Decimal128',
                   'String',
