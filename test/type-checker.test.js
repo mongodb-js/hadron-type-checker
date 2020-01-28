@@ -432,7 +432,7 @@ describe('TypeChecker', function() {
 
     context('when the object is a regex', function() {
       context('when casting to a string', function() {
-        var regex = new BSONRegExp('+w', ['i']);
+        var regex = new BSONRegExp('+w', 'i');
 
         it('returns the string regex', function() {
           expect(TypeChecker.cast(regex, 'String')).to.equal('');
@@ -576,7 +576,7 @@ describe('TypeChecker', function() {
     });
 
     context('when the object is a regex', function() {
-      var regex = new BSONRegExp('+w', ['i']);
+      var regex = new BSONRegExp('+w', 'i');
 
       it('returns BSONRegExp', function() {
         expect(TypeChecker.type(regex)).to.equal('BSONRegExp');
