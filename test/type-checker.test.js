@@ -13,7 +13,7 @@ const Long = bson.Long;
 const Double = bson.Double;
 const Int32 = bson.Int32;
 const Decimal128 = bson.Decimal128;
-const TypeChecker = require('../lib/type-checker');
+const TypeChecker = require('../');
 
 describe('TypeChecker', function() {
   describe('#cast', function() {
@@ -686,7 +686,8 @@ describe('TypeChecker', function() {
           'ObjectId',
           'BSONRegexp',
           'String',
-          'Symbol',
+          'BSONSymbol',
+          'BSONMap',
           'Timestamp',
           'Undefined'
         ]);
@@ -711,7 +712,8 @@ describe('TypeChecker', function() {
           'ObjectId',
           'BSONRegexp',
           'String',
-          'Symbol',
+          'BSONSymbol',
+          'BSONMap',
           'Timestamp',
           'Undefined'
         ]);
